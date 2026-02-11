@@ -21,7 +21,7 @@ export class IncidentListPage {
     // Keep this simple: try main document first, then common ServiceNow frame
     // 1) Main document
     try {
-      await this.page.locator('button[data-action-label="New"]').first().click({ timeout: 5000 });
+      await this.page.locator('button#sysverb_new').first().click({ timeout: 5000 });
       await this.page.waitForLoadState('networkidle');
       return;
     } catch {}
@@ -30,7 +30,7 @@ export class IncidentListPage {
     try {
       await this.page
         .frameLocator('iframe[name="gsft_main"], iframe#gsft_main')
-        .locator('button[data-action-label="New"]').first()
+        .locator('button#sysverb_new').first()
         .click({ timeout: 5000 });
       await this.page.waitForLoadState('networkidle');
       return;
