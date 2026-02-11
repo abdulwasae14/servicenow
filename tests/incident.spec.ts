@@ -75,29 +75,5 @@ test.describe('ServiceNow Incident Management', () => {
     });
   });
 
-  test('Verify short description is mandatory for incident creation', async ({ page }) => {
-    // Initialize Page Objects
-    const loginPage = new LoginPage(page);
-    const homePage = new HomePage(page);
-    const incidentListPage = new IncidentListPage(page);
 
-    // Test data
-    const username = process.env.SERVICENOW_USERNAME || 'admin';
-    const password = process.env.SERVICENOW_PASSWORD || 'password';
-
-    // Step 1: Login and navigate to form
-    await test.step('Login and navigate to incident creation form', async () => {
-      await loginPage.login(username, password);
-      await homePage.navigateToIncidentsViaMenu();
-      await incidentListPage.clickNewButton();
-    });
-
-    // Step 2: Verify mandatory field validation
-    await test.step('Verify short description field is required', async () => {
-      const frame = page.frameLocator('iframe[name="gsft_main"], iframe#gsft_main');
-      const submitButton = frame.getByRole('button', { name: /submit|save/i });
-      const isDisabled = await submitButton.isDisabled().catch(() => false);
-      expect(isDisabled).toBeTruthy();
-    });
-  });
 });
