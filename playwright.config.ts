@@ -17,7 +17,8 @@ export default defineConfig({
     baseURL: process.env.SERVICENOW_URL || 'https://dev272960.service-now.com/',
     trace: 'on-first-retry',
     // Run browsers headed by default for better visibility during training/demo
-    headless: false,
+    //headless: false,
+    headless: !!process.env.CI,
     // Increase action and navigation timeouts
     actionTimeout: 30000,
     navigationTimeout: 60000,
